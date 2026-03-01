@@ -402,6 +402,101 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Plus Jakarta Sans'
   .cover-title{font-size:2.8rem;letter-spacing:-1px;}
   .s-num-watermark{font-size:3rem;}
 }
+
+/* ── PHOTO VIEW BTN (bottom center of image) ── */
+.s-photo-view-btn{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  z-index:5;
+  display:flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(255,255,255,.95);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-radius:100px;
+  padding:10px 22px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:13px;font-weight:600;
+  color:var(--text2);
+  cursor:pointer;
+  box-shadow:0 6px 24px rgba(15,22,41,.14),inset 0 1px 0 #fff;
+  transition:all .3s var(--ease);
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  animation:none;
+}
+.s-photo-view-btn .vb-icon{font-size:15px;transition:transform .3s var(--ease);}
+.s-photo.img-loaded .s-photo-view-btn{
+  opacity:1;pointer-events:all;
+  animation:btnSlideUp .45s var(--spring) .3s both;
+}
+@keyframes btnSlideUp{from{opacity:0;transform:translateX(-50%) translateY(14px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.s-photo-view-btn:hover{
+  background:#fff;
+  color:var(--blue);
+  box-shadow:0 10px 36px rgba(37,99,235,.2),inset 0 1px 0 #fff;
+  transform:translateX(-50%) translateY(-2px);
+}
+.s-photo-view-btn:hover .vb-icon{transform:scale(1.2);}
+.s-photo-view-btn:active{transform:translateX(-50%) translateY(0);}
+
+/* ── FULLSCREEN MODAL ── */
+.fs-modal{
+  display:none;position:fixed;inset:0;z-index:99999;
+  align-items:center;justify-content:center;flex-direction:column;
+  padding:20px;
+}
+.fs-modal.open{
+  display:flex;
+  animation:fsBgIn .3s ease forwards;
+}
+@keyframes fsBgIn{to{background:rgba(10,14,30,.92);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);}}
+
+.fs-img-wrap{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.1);
+  animation:fsImgIn .38s var(--spring) both;
+  max-width:90vw;max-height:80vh;
+}
+@keyframes fsImgIn{from{opacity:0;transform:scale(.82) translateY(30px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+.fs-img{
+  display:block;
+  max-width:90vw;max-height:80vh;
+  object-fit:contain;
+  border-radius:20px;
+}
+
+.fs-info{
+  margin-top:20px;text-align:center;
+  animation:fadeUp .35s var(--ease) .15s both;
+}
+.fs-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:-.3px;
+}
+.fs-village{color:rgba(147,197,253,1);font-size:14px;margin-top:5px;font-weight:500;}
+.fs-meta{color:rgba(255,255,255,.3);font-size:11.5px;margin-top:3px;letter-spacing:.4px;}
+
+.fs-close{
+  position:fixed;top:18px;right:22px;
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  color:#fff;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;backdrop-filter:blur(10px);
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+  transition:all .25s var(--ease);z-index:100000;
+}
+.fs-close:hover{background:rgba(239,68,68,.25);border-color:rgba(239,68,68,.4);transform:scale(1.1) rotate(90deg);}
+
+.fs-hint{
+  position:fixed;bottom:18px;
+  font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.5px;
+}
 </style>
 </head>
 <body>
@@ -461,7 +556,7 @@ const students=[
   {id:16, name:"M.D.V.S.V. Prasad",            village:"Kotipalli"},
   {id:17, name:"N. Akhira Sarath",             village:"Rayanpadu"},
   {id:18, name:"K. Gnana Deepak",              village:"Velipuru"},
-  {id:19, name:"V. Prasanth Babu",        village:"Vallurupalem"},
+  {id:19, name:"V. Prasanth Babu",             village:"Vallurupalem"},
   {id:20, name:"P. Harsha Vardhan",            village:"Kochararla"},
   {id:21, name:"G. Vijay Kumar",               village:"Korukallu"},
   {id:22, name:"G. Sreyas Kumar",              village:"Vijayawada"},
@@ -500,6 +595,9 @@ students.forEach((s,i)=>{
           <div class="e-icon">📷</div>
           <div class="e-txt">Photo unavailable</div>
         </div>
+        <button class="s-photo-view-btn" onclick="fsOpen('${imgUrl}','${s.name}','${s.village}')">
+          <span class="vb-icon">🔍</span> View Photo
+        </button>
       </div>
 
       <div class="s-details">
@@ -599,6 +697,35 @@ document.addEventListener('touchend',e=>{
   const dx=tx-e.changedTouches[0].clientX;
   if(Math.abs(dx)>50){dx>0?goTo(current+1):goTo(current-1);}
 },{passive:true});
+
+/* ── Fullscreen modal ── */
+function fsOpen(src,name,village){
+  document.getElementById('fsImg').src=src;
+  document.getElementById('fsName').textContent=name;
+  document.getElementById('fsVillage').textContent='📍 '+village;
+  document.getElementById('fsModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function fsClose(){
+  document.getElementById('fsModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function fsCloseOut(e){if(e.target===document.getElementById('fsModal'))fsClose();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fsClose();});
 </script>
+
+<!-- Fullscreen Photo Modal -->
+<div class="fs-modal" id="fsModal" onclick="fsCloseOut(event)">
+  <button class="fs-close" onclick="fsClose()">✕</button>
+  <div class="fs-img-wrap">
+    <img class="fs-img" id="fsImg" src="" alt="">
+  </div>
+  <div class="fs-info">
+    <div class="fs-name" id="fsName"></div>
+    <div class="fs-village" id="fsVillage"></div>
+    <div class="fs-meta">Vidyardhi · Entrance Exam 2025–26</div>
+  </div>
+  <div class="fs-hint">Tap outside or press Esc to close</div>
+</div>
 </body>
 </html>

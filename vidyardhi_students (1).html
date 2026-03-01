@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vidyardhi · Entrance Exam 2025–26</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+/* ── VARIABLES ── */
+:root{
+  --bg1:#0a0f1e;
+  --bg2:#0d1530;
+  --bg3:#111827;
+  --glass:#ffffff0d;
+  --glass-border:#ffffff18;
+  --glass-shine:#ffffff26;
+  --glow1:#4f9cf9;
+  --glow2:#7c3aed;
+  --glow3:#06b6d4;
+  --accent:#60a5fa;
+  --gold:#f0b429;
+  --text:#e2e8f0;
+  --text-muted:#94a3b8;
+  --card-h:200px;
+  --transition:cubic-bezier(.4,0,.2,1);
+}
+
+/* ── BODY & BG ── */
+html{scroll-behavior:smooth}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg1);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* Animated gradient mesh background */
+.bg-mesh{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, #1e3a8a22 0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 90% 80%, #7c3aed1a 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 50% 50%, #0f172a 0%, #0a0f1e 100%);
+  animation: meshShift 18s ease-in-out infinite alternate;
+}
+@keyframes meshShift{
+  0%  { background-position: 0% 0%, 100% 100%, 50% 50%; }
+  50% { background-position: 30% 20%, 70% 60%, 50% 50%; }
+  100%{ background-position: 10% 40%, 90% 30%, 50% 50%; }
+}
+
+/* Floating orbs */
+.orb{
+  position:fixed;border-radius:50%;filter:blur(80px);
+  pointer-events:none;z-index:0;opacity:.35;
+  animation:orbFloat linear infinite;
+}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,#3b82f6,transparent 70%);top:-100px;left:-100px;animation-duration:25s;}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,#7c3aed,transparent 70%);bottom:-80px;right:-80px;animation-duration:30s;animation-delay:-10s;}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,#06b6d4,transparent 70%);top:40%;left:60%;animation-duration:20s;animation-delay:-5s;}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1);}
+  25%{transform:translate(40px,-30px) scale(1.05);}
+  50%{transform:translate(-20px,50px) scale(.95);}
+  75%{transform:translate(60px,20px) scale(1.08);}
+}
+
+/* Grid noise overlay */
+.noise{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+
+/* ── CONTENT WRAPPER ── */
+.wrap{position:relative;z-index:2;}
+
+/* ── HEADER ── */
+header{
+  padding:60px 40px 50px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,#ffffff06 0%,transparent 60%);
+  pointer-events:none;
+}
+
+.header-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--accent);font-weight:500;
+  background:rgba(96,165,250,.1);
+  border:1px solid rgba(96,165,250,.25);
+  padding:6px 16px;border-radius:100px;
+  margin-bottom:24px;
+  animation:slideDown .7s var(--transition) both;
+}
+.header-eyebrow::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 8px var(--accent);
+  animation:pulse 2s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+
+header h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:300;
+  line-height:1.05;
+  letter-spacing:-1px;
+  background:linear-gradient(135deg,#e2e8f0 20%,#93c5fd 55%,#c4b5fd 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:slideDown .8s var(--transition) .1s both;
+}
+
+.header-sub{
+  margin-top:14px;
+  font-size:15px;color:var(--text-muted);letter-spacing:.5px;
+  animation:slideDown .8s var(--transition) .2s both;
+}
+
+.header-stats{
+  display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+  margin-top:28px;
+  animation:slideDown .8s var(--transition) .3s both;
+}
+.stat-chip{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(12px);
+  padding:8px 20px;border-radius:100px;
+  font-size:13px;color:var(--text-muted);
+  display:flex;align-items:center;gap:6px;
+  transition:all .3s var(--transition);
+}
+.stat-chip:hover{border-color:rgba(96,165,250,.4);color:var(--accent);transform:translateY(-2px);}
+.stat-chip strong{color:var(--text);font-weight:500;}
+
+/* Divider line */
+.divider{
+  max-width:900px;margin:40px auto 0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(96,165,250,.3) 30%,rgba(124,58,237,.3) 70%,transparent);
+  animation:slideDown .8s var(--transition) .4s both;
+}
+
+@keyframes slideDown{from{opacity:0;transform:translateY(-22px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── SECTION LABEL ── */
+.section-label{
+  max-width:1000px;margin:40px auto 20px;
+  padding:0 20px;
+  display:flex;align-items:center;gap:14px;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--text-muted);
+}
+.section-label::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,var(--glass-border),transparent);
+}
+
+/* ── STUDENTS GRID ── */
+.students-grid{
+  max-width:1000px;margin:0 auto;
+  padding:0 20px 80px;
+  display:flex;flex-direction:column;gap:12px;
+}
+
+/* ── CARD ── */
+.student-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,.03) 100%);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  display:flex;align-items:flex-start;gap:22px;
+  padding:20px 24px;
+  position:relative;overflow:hidden;
+  transition:transform .35s var(--transition), box-shadow .35s var(--transition), border-color .35s var(--transition);
+  will-change:transform;
+  opacity:0;transform:translateY(30px);
+}
+.student-card.visible{
+  animation:cardReveal .55s var(--transition) both;
+}
+@keyframes cardReveal{
+  from{opacity:0;transform:translateY(28px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* Shine sweep on hover */
+.student-card::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.06) 50%,transparent 70%);
+  transform:translateX(-100%);
+  transition:transform .6s var(--transition);
+  pointer-events:none;border-radius:inherit;
+}
+.student-card:hover::before{transform:translateX(100%);}
+
+/* Top edge glow line */
+.student-card::after{
+  content:'';
+  position:absolute;top:0;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  transition:opacity .3s;
+}
+
+.student-card:hover{
+  transform:translateY(-4px) scale(1.005);
+  box-shadow:0 20px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(96,165,250,.2), inset 0 1px 0 rgba(255,255,255,.1);
+  border-color:rgba(96,165,250,.3);
+}
+
+/* Serial badge */
+.serial{
+  flex-shrink:0;
+  width:36px;height:36px;
+  background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(124,58,237,.2));
+  border:1px solid rgba(96,165,250,.3);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;
+  color:var(--accent);
+  margin-top:2px;
+  box-shadow:0 0 12px rgba(96,165,250,.1);
+}
+
+/* ── PHOTO AREA ── */
+.photo-wrap{
+  flex-shrink:0;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+
+.photo-placeholder{
+  width:150px;height:175px;
+  border-radius:16px;
+  border:1.5px dashed rgba(255,255,255,.2);
+  background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:border-color .3s,background .3s,transform .3s var(--transition);
+}
+.photo-placeholder:hover{
+  border-color:rgba(96,165,250,.5);
+  background:linear-gradient(135deg,rgba(96,165,250,.1),rgba(124,58,237,.08));
+  transform:scale(1.02);
+}
+.photo-placeholder input[type="file"]{
+  position:absolute;inset:0;opacity:0;cursor:pointer;z-index:3;
+}
+.photo-placeholder img.preview-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;border-radius:15px;display:none;
+  transition:transform .4s var(--transition);
+}
+.photo-placeholder:hover img.preview-img{transform:scale(1.04);}
+
+.cam-icon{font-size:36px;filter:grayscale(.4);transition:transform .3s,filter .3s;}
+.photo-placeholder:hover .cam-icon{transform:scale(1.1) rotate(-8deg);filter:grayscale(0);}
+.photo-label{font-size:11px;color:var(--text-muted);letter-spacing:.5px;text-align:center;line-height:1.5;}
+
+/* Ripple ring on placeholder */
+.photo-placeholder .ring{
+  position:absolute;width:60%;height:60%;border-radius:50%;
+  border:1px solid rgba(96,165,250,.15);
+  animation:ringPulse 3s ease infinite;
+  pointer-events:none;
+}
+.photo-placeholder .ring:nth-child(2){animation-delay:1s;width:80%;height:80%;}
+@keyframes ringPulse{0%,100%{opacity:.5;transform:scale(1);}50%{opacity:.1;transform:scale(1.1);}}
+
+/* View Button */
+.view-btn{
+  display:none;
+  width:150px;padding:9px 0;
+  background:linear-gradient(135deg,rgba(96,165,250,.25),rgba(124,58,237,.2));
+  border:1px solid rgba(96,165,250,.4);
+  border-radius:12px;
+  color:#93c5fd;
+  font-family:'Outfit',sans-serif;
+  font-size:12.5px;font-weight:500;
+  cursor:pointer;letter-spacing:.4px;
+  backdrop-filter:blur(8px);
+  transition:all .3s var(--transition);
+  position:relative;overflow:hidden;
+}
+.view-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+  transform:translateX(-100%);transition:transform .4s;
+}
+.view-btn:hover::before{transform:translateX(100%);}
+.view-btn:hover{
+  background:linear-gradient(135deg,rgba(96,165,250,.4),rgba(124,58,237,.35));
+  border-color:rgba(96,165,250,.7);
+  color:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 8px 24px rgba(96,165,250,.25);
+}
+.view-btn.visible{display:block;}
+
+/* ── DETAILS ── */
+.details{flex:1;padding-top:4px;}
+
+.student-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;font-weight:600;
+  color:#e2e8f0;
+  line-height:1.25;
+  letter-spacing:.2px;
+}
+
+.meta-row{
+  display:flex;flex-wrap:wrap;gap:14px;
+  margin-top:10px;
+}
+.meta-item{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;color:var(--text-muted);
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  padding:4px 12px;border-radius:8px;
+}
+.meta-item .icon{font-size:13px;}
+
+.class-badge{
+  margin-top:12px;
+  display:inline-flex;align-items:center;gap:5px;
+  background:linear-gradient(135deg,rgba(240,180,41,.15),rgba(240,180,41,.07));
+  border:1px solid rgba(240,180,41,.3);
+  color:var(--gold);
+  font-size:11px;font-weight:500;
+  padding:4px 12px;border-radius:8px;
+  letter-spacing:.5px;
+}
+
+/* ── FULLSCREEN MODAL ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0);
+  z-index:9999;
+  align-items:center;justify-content:center;flex-direction:column;
+  padding:24px;
+  transition:background .3s;
+}
+.modal-overlay.active{
+  display:flex;
+  animation:modalBgIn .3s ease forwards;
+}
+@keyframes modalBgIn{to{background:rgba(2,6,23,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}}
+
+.modal-glass{
+  background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:24px;
+  padding:6px;
+  box-shadow:0 40px 120px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.15);
+  animation:modalIn .35s cubic-bezier(.22,.68,0,1.2) both;
+  max-width:92vw;
+}
+@keyframes modalIn{
+  from{opacity:0;transform:scale(.82) translateY(30px);}
+  to{opacity:1;transform:scale(1) translateY(0);}
+}
+
+.modal-img{
+  display:block;
+  max-width:86vw;max-height:74vh;
+  border-radius:18px;
+  object-fit:contain;
+}
+
+.modal-info{
+  padding:20px 24px 16px;
+  text-align:center;
+}
+.modal-student-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.7rem;font-weight:600;
+  background:linear-gradient(135deg,#e2e8f0,#93c5fd);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.modal-student-village{
+  color:var(--gold);font-size:14px;margin-top:4px;letter-spacing:.4px;
+}
+.modal-student-class{
+  color:rgba(255,255,255,.3);font-size:12px;margin-top:3px;
+}
+
+.modal-close{
+  position:fixed;top:20px;right:24px;
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff;font-size:18px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(12px);
+  transition:all .25s var(--transition);
+  z-index:10000;
+}
+.modal-close:hover{
+  background:rgba(239,68,68,.25);
+  border-color:rgba(239,68,68,.4);
+  transform:scale(1.1) rotate(90deg);
+}
+
+.modal-hint{
+  position:fixed;bottom:20px;
+  font-size:11px;color:rgba(255,255,255,.25);
+  letter-spacing:.5px;
+}
+
+/* ── BOTTOM BAR ── */
+.bottom-bar{
+  max-width:1000px;margin:0 auto 60px;
+  padding:0 20px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+}
+.bottom-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
+  border:1px solid var(--glass-border);
+  border-radius:18px;
+  padding:22px 24px;
+  backdrop-filter:blur(20px);
+  text-align:center;
+  position:relative;overflow:hidden;
+  transition:transform .3s var(--transition),box-shadow .3s;
+}
+.bottom-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4);}
+.bottom-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(96,165,250,.05),transparent 60%);
+  pointer-events:none;
+}
+.bc-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.4rem;font-weight:600;
+  background:linear-gradient(135deg,var(--accent),#c4b5fd);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.bc-label{
+  font-size:12px;color:var(--text-muted);
+  letter-spacing:.8px;text-transform:uppercase;margin-top:4px;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  header{padding:40px 20px 36px;}
+  header h1{font-size:2.4rem;}
+  .students-grid{padding:0 12px 60px;}
+  .student-card{padding:14px 16px;gap:14px;}
+  .photo-placeholder{width:100px;height:120px;}
+  .view-btn{width:100px;font-size:11px;}
+  .bottom-bar{grid-template-columns:1fr 1fr;padding:0 12px;}
+  .bottom-bar .bottom-card:last-child{grid-column:span 2;}
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:#0a0f1e;}
+::-webkit-scrollbar-thumb{background:rgba(96,165,250,.3);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:rgba(96,165,250,.5);}
+
+/* ── SELECTION ── */
+::selection{background:rgba(96,165,250,.3);color:#fff;}
+</style>
+</head>
+<body>
+
+<!-- BG layers -->
+<div class="bg-mesh"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<div class="noise"></div>
+
+<!-- Fullscreen Modal -->
+<div class="modal-overlay" id="photoModal" onclick="closeModalOutside(event)">
+  <button class="modal-close" onclick="closeModalBtn()" title="Close (Esc)">✕</button>
+  <div class="modal-glass">
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div class="modal-info">
+      <div class="modal-student-name" id="modalName"></div>
+      <div class="modal-student-village" id="modalVillage"></div>
+      <div class="modal-student-class">Class 5th · Vidyardhi Entrance 2025–26</div>
+    </div>
+  </div>
+  <div class="modal-hint">Tap outside or press Esc to close</div>
+</div>
+
+<!-- Main content -->
+<div class="wrap">
+  <header>
+    <div class="header-eyebrow">
+      <span></span>Vidyardhi · 2025–26
+    </div>
+    <h1>Entrance Exam<br>Registration</h1>
+    <p class="header-sub">6th Class Intake · Academic Year 2025 – 2026</p>
+    <div class="header-stats">
+      <div class="stat-chip"><span>🎓</span><strong>30</strong> Students</div>
+      <div class="stat-chip"><span>📚</span><strong>6th</strong> Class Intake</div>
+      <div class="stat-chip"><span>📅</span>Year <strong>2025–26</strong></div>
+    </div>
+    <div class="divider"></div>
+  </header>
+
+  <div class="section-label">Student Profiles</div>
+
+  <div class="students-grid" id="studentsGrid"></div>
+
+  <div class="bottom-bar">
+    <div class="bottom-card">
+      <div class="bc-val">30</div>
+      <div class="bc-label">Total Students</div>
+    </div>
+    <div class="bottom-card">
+      <div class="bc-val">6th</div>
+      <div class="bc-label">Class</div>
+    </div>
+    <div class="bottom-card">
+      <div class="bc-val">2025–26</div>
+      <div class="bc-label">Academic Year</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const students=[
+  {id:1,  name:"T. Sajeth",                   village:"Pandugula"},
+  {id:2,  name:"D. Lithesh Kumar",             village:"Raketha"},
+  {id:3,  name:"P. Varun Teja",                village:"Korukullu"},
+  {id:4,  name:"M. Gowtham",                   village:"Srinagar"},
+  {id:5,  name:"Sk. Yazwan",                   village:"Atkur"},
+  {id:6,  name:"V. Bala Nama Gopi Krishna",    village:"Dachepalli"},
+  {id:7,  name:"T. Karthik",                   village:"Dhappalapudi"},
+  {id:8,  name:"Sk. Nagun Vali",               village:"Kesanpalli"},
+  {id:9,  name:"Y. Pradeep",                   village:"Dhappalapudi"},
+  {id:10, name:"L. Koushik",                   village:"Remidicharla"},
+  {id:11, name:"B. Karthikeya",                village:"Kummirikunta"},
+  {id:12, name:"M.V. Akhil",                   village:"Chetticharla"},
+  {id:13, name:"J. Medhansh",                  village:"Atkur"},
+  {id:14, name:"T. Harsha Sri Venkat Sai",     village:"Tadepalligudem"},
+  {id:15, name:"K. Karthik Siva Nama Teja",    village:"Tadepalligudem"},
+  {id:16, name:"M.D.V.S.V. Prasad",            village:"Kotipalli"},
+  {id:17, name:"N. Akhira Sarath",             village:"Rayanpadu"},
+  {id:18, name:"K. Gnana Deepak",              village:"Velipuru"},
+  {id:19, name:"V. Penu Prasanth Babu",        village:"Vallurupalem"},
+  {id:20, name:"P. Harsha Vardhan",            village:"Kocharb"},
+  {id:21, name:"G. Vijay Kumar",               village:"Korukallu"},
+  {id:22, name:"G. Sreyas Kumar",              village:"Vijayawada"},
+  {id:23, name:"K. Abhilash",                  village:"Vijayawada"},
+  {id:24, name:"A. Mohan Karthik",             village:"Kalipatnam"},
+  {id:25, name:"P. Rithik",                    village:"Kocharla"},
+  {id:26, name:"S. Vinodh Paul",               village:"Atkuru"},
+  {id:27, name:"Victor Paul S",                village:"Atkuru"},
+  {id:28, name:"N. Dhanush",                   village:"Mangalagiri"},
+  {id:29, name:"P. Abdul Shadi",               village:"Pandugula"},
+  {id:30, name:"V. Gangeya",                   village:"Kesanpalli"},
+];
+
+const grid=document.getElementById('studentsGrid');
+const frag=document.createDocumentFragment();
+
+students.forEach(s=>{
+  const card=document.createElement('div');
+  card.className='student-card';
+  card.innerHTML=`
+    <div class="serial">${String(s.id).padStart(2,'0')}</div>
+    <div class="photo-wrap">
+      <label class="photo-placeholder" title="Upload photo">
+        <div class="ring"></div><div class="ring"></div>
+        <input type="file" accept="image/*" data-name="${s.name}" data-village="${s.village}" onchange="previewPhoto(this)">
+        <img class="preview-img" alt="${s.name}">
+        <div class="cam-icon">📷</div>
+        <div class="photo-label">Add Photo</div>
+      </label>
+      <button class="view-btn" onclick="openModal(this)">🔍 View Photo</button>
+    </div>
+    <div class="details">
+      <div class="student-name">${s.name}</div>
+      <div class="meta-row">
+        <div class="meta-item"><span class="icon">📍</span>${s.village}</div>
+      </div>
+      <div class="class-badge">✦ Class 5th</div>
+    </div>`;
+  frag.appendChild(card);
+});
+grid.appendChild(frag);
+
+/* ── Intersection Observer for scroll-triggered card reveal ── */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      const card=e.target;
+      // small stagger based on position in batch
+      const delay=Math.min(i*40,200);
+      setTimeout(()=>card.classList.add('visible'),delay);
+      io.unobserve(card);
+    }
+  });
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+
+document.querySelectorAll('.student-card').forEach(c=>io.observe(c));
+
+/* ── Photo upload ── */
+function previewPhoto(input){
+  if(!input.files||!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const label=input.parentElement;
+    const img=label.querySelector('.preview-img');
+    img.src=e.target.result;
+    img.style.display='block';
+    label.querySelector('.cam-icon').style.display='none';
+    label.querySelector('.photo-label').style.display='none';
+    label.querySelectorAll('.ring').forEach(r=>r.style.display='none');
+    label.parentElement.querySelector('.view-btn').classList.add('visible');
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+/* ── Modal ── */
+function openModal(btn){
+  const wrap=btn.parentElement;
+  const input=wrap.querySelector('input[type="file"]');
+  const img=wrap.querySelector('.preview-img');
+  if(!img||!img.src)return;
+  document.getElementById('modalImg').src=img.src;
+  document.getElementById('modalName').textContent=input.dataset.name;
+  document.getElementById('modalVillage').textContent='📍 '+input.dataset.village;
+  document.getElementById('photoModal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeModalBtn(){
+  document.getElementById('photoModal').classList.remove('active');
+  document.body.style.overflow='';
+}
+function closeModalOutside(e){
+  if(e.target===document.getElementById('photoModal'))closeModalBtn();
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeModalBtn(); });
+</script>
+</body>
+</html>
